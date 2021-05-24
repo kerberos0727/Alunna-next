@@ -14,7 +14,7 @@ interface LabelProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    fontFamily: theme.typography.fontFamily,
+    fontFamily: 'Roboto',
     alignItems: 'center',
     borderRadius: 2,
     display: 'inline-flex',
@@ -22,35 +22,35 @@ const useStyles = makeStyles((theme: Theme) => ({
     whiteSpace: 'nowrap',
     cursor: 'default',
     flexShrink: 0,
-    fontSize: theme.typography.pxToRem(12),
-    fontWeight: theme.typography.fontWeightMedium,
+    fontSize: 12,
+    fontWeight: "normal",
     height: 20,
     justifyContent: 'center',
     letterSpacing: 0.5,
     minWidth: 20,
-    padding: theme.spacing(0.5, 1),
+    padding: 5,
     // textTransform: 'uppercase',
     textTransform: 'none'
   },
   primary: {
-    color: theme.palette.primary.main,
-    backgroundColor: fade(theme.palette.primary.main, 0.08)
+    color: "#000",
+    backgroundColor: '#fff'
   },
   secondary: {
-    color: theme.palette.secondary.main,
-    backgroundColor: fade(theme.palette.secondary.main, 0.08)
+    color: '#000',
+    backgroundColor: '#fff'
   },
   error: {
-    color: theme.palette.error.main,
-    backgroundColor: fade(theme.palette.error.main, 0.08)
+    color: '#000',
+    backgroundColor: '#fff'
   },
   success: {
-    color: theme.palette.success.main,
-    backgroundColor: fade(theme.palette.success.main, 0.08)
+    color: '#000',
+    backgroundColor: '#fff'
   },
   warning: {
-    color: theme.palette.warning.main,
-    backgroundColor: fade(theme.palette.warning.main, 0.08)
+    color: '#000',
+    backgroundColor: '#fff'
   }
 }));
 

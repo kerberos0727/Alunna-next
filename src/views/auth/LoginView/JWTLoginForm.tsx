@@ -7,10 +7,9 @@ import {
   Button,
   FormHelperText,
   makeStyles,
-  Link,
   Typography,
 } from '@material-ui/core';
-import { Link as RouterLink } from 'react-router-dom';
+import Link from 'next/link';
 import CustomTextField from 'components/CustomTextField';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
@@ -164,11 +163,11 @@ const JWTLoginForm = (props: ComponentProps) => {
                 </Box>
               )}
               <Link
-                component={RouterLink}
-                to="/forgot-password"
-                variant="body2"
-                color="primary"
-                className={classes.forgotPassword}
+                // component={RouterLink}
+                href="/notFound"
+              // variant="body2"
+              // color="primary"
+              // className={classes.forgotPassword}
               >
                 Forgot password
               </Link>
@@ -180,7 +179,7 @@ const JWTLoginForm = (props: ComponentProps) => {
                   size="large"
                   type="submit"
                   variant="contained"
-                  // onClick={handleLogin}
+                // onClick={handleLogin}
                 >
                   {isLoggingIn ? 'Logging In...' : 'Log In'}
                 </Button>

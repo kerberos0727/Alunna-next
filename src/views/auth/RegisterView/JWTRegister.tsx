@@ -13,7 +13,7 @@ import {
   Theme,
   Divider
 } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { useRouter } from 'next/router';
 // import useIsMountedRef from 'hooks/useIsMountedRef';
 import CustomTextField from 'components/CustomTextField';
 import CustomMainButton from 'components/CustomMainButton';
@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
   },
   googleButton: {
-    backgroundColor: theme.palette.common.white,
+    backgroundColor: '#fff',
     textTransform: 'unset',
     color: '#546681',
     fontSize: 16,
@@ -102,7 +102,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   providerIcon: {
-    marginRight: theme.spacing(2)
+    marginRight: 20
   },
   btnCommon: {
     marginBottom: 10,
@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: '#EFF0F6',
   },
   dividerText: {
-    margin: theme.spacing(2)
+    margin: 20
   },
   noWidth: {
     width: "unset"
@@ -125,7 +125,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const JWTRegister: FC<JWTRegisterProps> = ({ viewDeviceType, onClickedLoginProps, className, ...rest }) => {
-  const history = useHistory();
+  const history = useRouter();
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -148,7 +148,7 @@ const JWTRegister: FC<JWTRegisterProps> = ({ viewDeviceType, onClickedLoginProps
 
   const root = classNames({
     [classes.root]: true,
-    [classes.noWidth]: viewDeviceType===2,
+    [classes.noWidth]: viewDeviceType === 2,
   });
 
   return (
@@ -165,7 +165,7 @@ const JWTRegister: FC<JWTRegisterProps> = ({ viewDeviceType, onClickedLoginProps
         })}
         onSubmit={(values) => {
           dispatch(AuthenticationActions.setSignUpEmail(values.email));
-          history.push('/complete-account-setup');
+          history.push('/completeAccountSetup');
         }}
       >
         {({
@@ -276,7 +276,7 @@ const JWTRegister: FC<JWTRegisterProps> = ({ viewDeviceType, onClickedLoginProps
                 />
               </Box>
             </form>
-            
+
           </div>
         )}
       </Formik>

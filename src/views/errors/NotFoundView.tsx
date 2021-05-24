@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import Link from 'next/link';
 import {
   Box,
   Button,
@@ -15,11 +15,11 @@ import Page from 'components/Page';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
+    backgroundColor: '#333',
     minHeight: '100%',
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(3),
+    padding: 30,
     paddingTop: 80,
     paddingBottom: 80
   },
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const NotFoundView: FC = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
+  // const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Page
@@ -44,7 +44,7 @@ const NotFoundView: FC = () => {
       <Container maxWidth="lg">
         <Typography
           align="center"
-          variant={mobileDevice ? 'h4' : 'h1'}
+          variant='h3'
           color="textPrimary"
         >
           404: The page you are looking for isn’t here
@@ -73,14 +73,14 @@ const NotFoundView: FC = () => {
           display="flex"
           justifyContent="center"
         >
-          <Button
-            color="secondary"
-            component={RouterLink}
-            to="/"
-            variant="outlined"
+          <Link
+            // color="secondary"
+            // component={RouterLink}
+            href="/"
+          // variant="outlined"
           >
             Back to home
-          </Button>
+          </Link>
         </Box>
       </Container>
     </Page>

@@ -10,7 +10,7 @@ interface MainLayoutProps {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#fff',
     // display: 'flex',
     // height: '100%',
     // overflow: 'hidden',

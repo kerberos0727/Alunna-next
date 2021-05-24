@@ -3,10 +3,9 @@ import type { FC } from 'react';
 import {
   makeStyles,
   Container,
-  Link,
   Theme
 } from '@material-ui/core';
-import { Link as RouterLink } from 'react-router-dom';
+import Link from 'next/link';
 
 interface TeacherQuestionHeaderProps {
 }
@@ -14,8 +13,8 @@ interface TeacherQuestionHeaderProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     height: 100,
-    paddingBottom: theme.spacing(2),
-    paddingTop: theme.spacing(2),
+    paddingBottom: 20,
+    paddingTop: 20,
     display: 'flex',
     alignItems: 'center',
   },
@@ -27,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   banner: {
   },
   bannerChip: {
-    marginRight: theme.spacing(2)
+    marginRight: 20
   },
   cardContent: {
 
@@ -63,11 +62,11 @@ const TeacherQuestionHeader: FC<TeacherQuestionHeaderProps> = ({ ...rest }) => {
         maxWidth="lg"
       >
         <Link
-          component={RouterLink}
-          to="/"
-          variant="body2"
-          color="primary"
-          className={classes.logoLink}
+          // component={RouterLink}
+          href="/"
+          // variant="body2"
+          // color="primary"
+          // className={classes.logoLink}
         >
           <img
             alt="Logo"

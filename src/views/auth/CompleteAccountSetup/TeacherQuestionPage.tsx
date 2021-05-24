@@ -126,7 +126,7 @@ const TeacherQuestionPage: FC<TeacherQuestionPageProps> = ({ className, setStep,
 
   if (activeQuestion >= questions.length) {
     return (
-      <Redirect to="/thank-you?action=registration" />
+      <Redirect to="/thankyou?action=registration" />
     );
   }
 

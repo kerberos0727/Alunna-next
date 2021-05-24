@@ -42,17 +42,17 @@ const useStyles = makeStyles((theme) => ({
   },
   popperResponsive: {
     zIndex: 1200,
-    [theme.breakpoints.down("sm")]: {
-      zIndex: 1640,
-      position: "static",
-      float: "none",
-      width: "auto",
-      marginTop: 0,
-      backgroundColor: "transparent",
-      border: 0,
-      boxShadow: "none",
-      color: "black"
-    }
+    // [theme.breakpoints.down("sm")]: {
+    //   zIndex: 1640,
+    //   position: "static",
+    //   float: "none",
+    //   width: "auto",
+    //   marginTop: 0,
+    //   backgroundColor: "transparent",
+    //   border: 0,
+    //   boxShadow: "none",
+    //   color: "black"
+    // }
   },
   dropdownItem: {
     fontSize: "13px",

@@ -17,7 +17,7 @@ interface ComponentProps {
 }
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#fff',
     display: 'flex',
     flexDirection: 'column',
     maxHeight: '100vh',
@@ -29,19 +29,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 'calc(100vh - 80px)'
   },
   bannerChip: {
-    marginRight: theme.spacing(2)
+    marginRight: 20
   },
   methodIcon: {
     height: 30,
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2)
+    marginLeft: 20,
+    marginRight: 20
   },
   cardContainer: {
     paddingBottom: 80,
     paddingTop: 80,
   },
   cardContent: {
-    padding: theme.spacing(4),
+    padding: 40,
     display: 'flex',
     flexDirection: 'column',
     minHeight: 400

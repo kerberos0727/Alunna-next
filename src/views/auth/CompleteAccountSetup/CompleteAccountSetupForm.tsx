@@ -22,7 +22,7 @@ import CustomMainButton from 'components/CustomMainButton';
 import { ToggleButton } from '@material-ui/lab';
 import { withStyles } from '@material-ui/styles';
 import { CompleteAccountStep, UserType } from 'types/user';
-import { useHistory } from 'react-router';
+import { useRouter } from 'next/router';
 import { IStoreState } from 'reducers/root.reducer';
 import * as AuthenticationActions from 'actions/authentication.action';
 
@@ -91,10 +91,10 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
     width: '100%',
     border: 'none',
     '&:not(:first-child)': {
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: 10,
     },
     '&:first-child': {
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: 10,
     },
     '&.Mui-selected': {
       borderRadius: 15,
@@ -111,7 +111,7 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
 
 const CompleteAccountSetupForm: FC<CompleteAccountSetupFormProps> = ({ className, setStep, ...rest }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const history = useRouter();
   const dispatch = useDispatch();
   const authState = useSelector(
     (state: IStoreState) => state.authentication
@@ -156,12 +156,12 @@ const CompleteAccountSetupForm: FC<CompleteAccountSetupFormProps> = ({ className
           middle_name: values.middleName
         };
         setTimeout(function () {
-          if(role === UserType.Teacher) {
+          if (role === UserType.Teacher) {
             setStep(CompleteAccountStep.Teacher_Question);
           }
           else {
             // history.push('/thank-you?action=registration')
-            history.push('/thank-you-no-payment')
+            history.push('/noPayment')
           }
         }, 2000);
         dispatch(AuthenticationActions.signUp(fields));
@@ -184,10 +184,10 @@ const CompleteAccountSetupForm: FC<CompleteAccountSetupFormProps> = ({ className
             {...rest}
           >
             <Box className={classes.userType} mb={4}>
-              <Field 
-                component={StyledToggleButtonGroup} 
-                size="small" 
-                name="userType" 
+              <Field
+                component={StyledToggleButtonGroup}
+                size="small"
+                name="userType"
                 exclusive={true}
                 type="checkbox"
                 value={role}
@@ -195,15 +195,15 @@ const CompleteAccountSetupForm: FC<CompleteAccountSetupFormProps> = ({ className
                   setRole(newRole)
                 }}
               >
-                <ToggleButton 
-                  value={UserType.Teacher} 
+                <ToggleButton
+                  value={UserType.Teacher}
 
                   className={classes.toggleBtn}
                 >
                   I'm a Teacher
                 </ToggleButton>
-                <ToggleButton 
-                  value={UserType.Student} 
+                <ToggleButton
+                  value={UserType.Student}
                   className={classes.toggleBtn}
                 >
                   I'm a Student
@@ -257,7 +257,7 @@ const CompleteAccountSetupForm: FC<CompleteAccountSetupFormProps> = ({ className
               type={showPassword ? 'text' : 'password'}
               value={values.password}
               endElement={showPassword
-                ? (<img src="/static/images/visibility.svg" alt="show password" onClick={() => setShowPassword(!showPassword)}/>)
+                ? (<img src="/static/images/visibility.svg" alt="show password" onClick={() => setShowPassword(!showPassword)} />)
                 : (<img src="/static/images/visibility_off.svg" alt="hide password" onClick={() => setShowPassword(!showPassword)} />)
               }
             />
@@ -272,10 +272,10 @@ const CompleteAccountSetupForm: FC<CompleteAccountSetupFormProps> = ({ className
               onChange={handleChange}
               type="password"
               value={values.confirmPassword}
-              // endElement={showPassword
-              //   ? (<img src="/static/images/visibility.svg" alt="show password" onClick={() => setShowPassword(!showPassword)}/>)
-              //   : (<img src="/static/images/visibility_off.svg" alt="hide password" onClick={() => setShowPassword(!showPassword)} />)
-              // }
+            // endElement={showPassword
+            //   ? (<img src="/static/images/visibility.svg" alt="show password" onClick={() => setShowPassword(!showPassword)}/>)
+            //   : (<img src="/static/images/visibility_off.svg" alt="hide password" onClick={() => setShowPassword(!showPassword)} />)
+            // }
             />
             <Box
               alignItems="flex-start"
@@ -334,7 +334,7 @@ const CompleteAccountSetupForm: FC<CompleteAccountSetupFormProps> = ({ className
             <Box mt={2} className={classes.btnWrapper}>
               <CustomMainButton
                 disabled={isSubmitting}
-                
+
                 label="Create account"
                 type="submit"
               />

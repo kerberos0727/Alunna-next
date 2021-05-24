@@ -11,13 +11,13 @@ import type { Theme } from 'theme';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     alignItems: 'center',
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#fff',
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
     justifyContent: 'center',
     minHeight: '100%',
-    padding: theme.spacing(3)
+    padding: 3
   }
 }));
 

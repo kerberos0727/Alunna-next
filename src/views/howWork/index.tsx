@@ -96,7 +96,7 @@ const HowItWork = props => {
       title: 'Start building with peers from around the world',
       content: `Our classes are intense & fast-paced, and we sincerely want you to succeed. We do not disqualify based on performance in this prerequisite period. And, yes, the prereq material is free, even if you decide not to enroll.`
     },
-    // need to onClick={() => history.push('/classes')} for step 4
+    // need to onClick={() => history.push('/classesView')} for step 4
     {
       step: 4,
       title: '',

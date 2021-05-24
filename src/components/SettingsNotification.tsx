@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'fixed',
     top: 0,
     right: 0,
-    margin: theme.spacing(3),
+    margin: 30,
     outline: 'none',
     zIndex: 2000,
-    padding: theme.spacing(2)
+    padding: 20
   }
 }));
 

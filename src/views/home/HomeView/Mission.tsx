@@ -1,12 +1,12 @@
 import React from 'react'
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Card, CardContent, Container, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#fff',
     background: 'linear-gradient(0deg, #EDEDFF, #EDEDFF), linear-gradient(180deg, #3B5AAF 6.22%, #292167 100%), #FFFFFF',
 
     border: '1px solid #D6D8E7',
@@ -108,7 +108,7 @@ const Mission: FC<OwnProps> = ({viewDeviceType}) => {
                         <Typography className={classes.miniCartTitle}>{card.title}</Typography>
                         <Typography className={classes.miniCartDesc}>{card.content}</Typography>
                         <div className={clsx("d-flex align-items-center", classes.learnMoreWrapper)}>
-                          <Link to="/how-it-works">
+                          <Link href="/howWork">
                             <Typography className={classes.learnMore}>Learn more</Typography>
                           </Link>
                           <img alt="learn more" src="/static/home/arrow_right.svg" />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   technologyIcon: {
     height: 40,
-    margin: theme.spacing(1)
+    margin: 1
   },
   image: {
   },
@@ -78,7 +78,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   itemsWithMargin: {
     marginTop: 20,
-    marginBottom: 28
+    marginBottom: 28,
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   primaryFormTitle: {
     color: "#4B4FE4"
@@ -110,7 +112,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Hero: FC<HeroProps> = ({ viewDeviceType, openRegister, className, ...rest }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const history = useRouter();
 
   const openSignup = () => {
     openRegister();
@@ -124,103 +126,103 @@ const Hero: FC<HeroProps> = ({ viewDeviceType, openRegister, className, ...rest 
     [classes.tabletHeroHeight]: viewDeviceType === 1,
   });
   if (viewDeviceType < 2)
-  return (
-    <div
-      className={clsx(root, className)}
-      {...rest}
-    >
-      <Container maxWidth="lg">
-        <div className={cta}>
-          <Typography
-            variant="h2"
-            color="textPrimary"
-            className={classes.title}
-          >
-            Live classes,<br/><span className={classes.primaryFormTitle}>taught online.</span>
-          </Typography>
-          
-          <Box mt={2}>
+    return (
+      <div
+        className={clsx(root, className)}
+        {...rest}
+      >
+        <Container maxWidth="lg">
+          <div className={cta}>
             <Typography
-              variant="body1"
-              color="textSecondary"
-              className={classes.description}
+              variant="h2"
+              color="textPrimary"
+              className={classes.title}
             >
-              Real engineering with real learning. Get the accessibility of online classes with the environment of a live, in-person lab with peers.
+              Live classes,<br /><span className={classes.primaryFormTitle}>taught online.</span>
             </Typography>
-          </Box>
-          {/* need to make margin-top: 20px */}
-          <Box mt={2} display="flex" className={classes.itemsWithMargin}>
-            <div className={clsx("d-flex align-item-centers", classes.inlineTextWithIconWrapper)}>
-              <img alt="no transcripts" src="/static/home/no_transcript.svg" />
-              <Typography variant="body2" className={classes.inlineTextWithIcon}>No transcripts</Typography>
-            </div>
-            <div className={clsx("d-flex align-item-centers", classes.inlineTextWithIconWrapper)}>
-              <img alt="no transcripts" src="/static/home/no_cloud.svg" />
-              <Typography variant="body2" className={classes.inlineTextWithIcon}>No admissions</Typography>
-            </div>
-            <div className="d-flex align-item-centers">
-              <img alt="no transcripts" src="/static/home/no_isolation.svg" />
-              <Typography variant="body2" className={classes.inlineTextWithIcon}>No isolation</Typography>
-            </div>
-          </Box>
-          {/* need to make margin-top: 28px */}
-          <Box mt={3}>
-            <CustomMainButton label="Get started" customClass={classes.customCTAButton} onClick={() => openSignup()} />
-            <Button onClick={() => history.push('/classes')} variant="outlined" className={clsx(classes.customCTAButton, classes.seeOurClassBtn)}>See our classes</Button>
-          </Box>
-        </div>
-      </Container>
-    </div>
+
+            <Box mt={2}>
+              <Typography
+                variant="body1"
+                color="textSecondary"
+                className={classes.description}
+              >
+                Real engineering with real learning. Get the accessibility of online classes with the environment of a live, in-person lab with peers.
+            </Typography>
+            </Box>
+            {/* need to make margin-top: 20px */}
+            <Box mt={2} display="flex" className={classes.itemsWithMargin}>
+              <div className={clsx("d-flex align-item-centers", classes.inlineTextWithIconWrapper)}>
+                <img alt="no transcripts" src="/static/home/no_transcript.svg" />
+                <Typography variant="body2" className={classes.inlineTextWithIcon}>No transcripts</Typography>
+              </div>
+              <div className={clsx("d-flex align-item-centers", classes.inlineTextWithIconWrapper)}>
+                <img alt="no transcripts" src="/static/home/no_cloud.svg" />
+                <Typography variant="body2" className={classes.inlineTextWithIcon}>No admissions</Typography>
+              </div>
+              <div className="d-flex align-item-centers">
+                <img alt="no transcripts" src="/static/home/no_isolation.svg" />
+                <Typography variant="body2" className={classes.inlineTextWithIcon}>No isolation</Typography>
+              </div>
+            </Box>
+            {/* need to make margin-top: 28px */}
+            <Box mt={3}>
+              <CustomMainButton label="Get started" customClass={classes.customCTAButton} onClick={() => openSignup()} />
+              <Button onClick={() => history.push('/classesView')} variant="outlined" className={clsx(classes.customCTAButton, classes.seeOurClassBtn)}>See our classes</Button>
+            </Box>
+          </div>
+        </Container>
+      </div>
     );
   else
-  return (
-    <div
-      className={clsx( className, classes.mobileHero)}
-      {...rest}
-    >
-      <Container>
-        <div>
-          <Typography
-            variant="h2"
-            color="textPrimary"
-            className={classes.title}
-          >
-            Live classes,<br/><span className={classes.primaryFormTitle}>taught online.</span>
-          </Typography>
-          
-          <Box mt={2}>
+    return (
+      <div
+        className={clsx(className, classes.mobileHero)}
+        {...rest}
+      >
+        <Container>
+          <div>
             <Typography
-              variant="body1"
-              color="textSecondary"
-              className={classes.description}
+              variant="h2"
+              color="textPrimary"
+              className={classes.title}
             >
-              Real engineering with real learning. Get the accessibility of online classes with the environment of a live, in-person lab with peers.
+              Live classes,<br /><span className={classes.primaryFormTitle}>taught online.</span>
             </Typography>
-          </Box>
-          {/* need to make margin-top: 20px */}
-          <Box mt={2} className={classes.itemsWithMargin}>
-            <div className={clsx("d-flex align-item-centers float-left", classes.w50, classes.margin20)}>
-              <img alt="no transcripts" src="/static/home/no_transcript.svg" />
-              <Typography variant="body2" className={classes.inlineTextWithIcon}>No transcripts</Typography>
-            </div>
-            <div className={clsx("d-flex align-item-centers float-left", classes.w50, classes.margin20)}>
-              <img alt="no transcripts" src="/static/home/no_cloud.svg" />
-              <Typography variant="body2" className={classes.inlineTextWithIcon}>No admissions</Typography>
-            </div>
-            <div className={clsx("d-flex align-item-centers", classes.w100, classes.margin20)}>
-              <img alt="no transcripts" src="/static/home/no_isolation.svg" />
-              <Typography variant="body2" className={classes.inlineTextWithIcon}>No isolation</Typography>
-            </div>
-          </Box>
-          {/* need to make margin-top: 28px */}
-          <Box mt={3}>
-            <CustomMainButton label="Get started" customClass={clsx(classes.customCTAButton, classes.w100, classes.margin20)} onClick={() => openSignup()} />
-            <Button onClick={() => history.push('/classes')} variant="outlined" className={clsx(classes.customCTAButton, classes.w100)}>See our classes</Button>
-          </Box>
-        </div>
-      </Container>
-    </div>
-  );
+
+            <Box mt={2}>
+              <Typography
+                variant="body1"
+                color="textSecondary"
+                className={classes.description}
+              >
+                Real engineering with real learning. Get the accessibility of online classes with the environment of a live, in-person lab with peers.
+            </Typography>
+            </Box>
+            {/* need to make margin-top: 20px */}
+            <Box mt={2} className={classes.itemsWithMargin}>
+              <div className={clsx("d-flex align-item-centers float-left", classes.w50, classes.margin20)}>
+                <img alt="no transcripts" src="/static/home/no_transcript.svg" />
+                <Typography variant="body2" className={classes.inlineTextWithIcon}>No transcripts</Typography>
+              </div>
+              <div className={clsx("d-flex align-item-centers float-left", classes.w50, classes.margin20)}>
+                <img alt="no transcripts" src="/static/home/no_cloud.svg" />
+                <Typography variant="body2" className={classes.inlineTextWithIcon}>No admissions</Typography>
+              </div>
+              <div className={clsx("d-flex align-item-centers", classes.w100, classes.margin20)}>
+                <img alt="no transcripts" src="/static/home/no_isolation.svg" />
+                <Typography variant="body2" className={classes.inlineTextWithIcon}>No isolation</Typography>
+              </div>
+            </Box>
+            {/* need to make margin-top: 28px */}
+            <Box mt={3}>
+              <CustomMainButton label="Get started" customClass={clsx(classes.customCTAButton, classes.w100, classes.margin20)} onClick={() => openSignup()} />
+              <Button onClick={() => history.push('/classesView')} variant="outlined" className={clsx(classes.customCTAButton, classes.w100)}>See our classes</Button>
+            </Box>
+          </div>
+        </Container>
+      </div>
+    );
 };
 
 Hero.propTypes = {

@@ -3,7 +3,7 @@ import { Box, Container, Grid, makeStyles, Theme, Typography } from '@material-u
 import CustomStepperNonContent from 'components/CustomStepperNonContent';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#fff',
     marginTop: 120,
     display: 'flex',
     marginBottom: 120,

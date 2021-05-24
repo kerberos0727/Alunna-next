@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 // function useRouterQueryParams() {
 //   // call it inside useEffect ?? but it might need before mounted.
@@ -7,9 +8,10 @@ import { useLocation } from 'react-router-dom';
 // }
 
 function useRouterQueryParams() {
-  const location = useLocation();
-  const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  const location = useRouter();
+  const queryParams = useMemo(() => new URLSearchParams(location.query), [location]);
   return queryParams;
+  // return null;
 }
 
 export default useRouterQueryParams;

@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#fff',
 
     marginTop: 120,
     display: 'flex',

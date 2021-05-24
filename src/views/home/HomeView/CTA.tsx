@@ -17,12 +17,12 @@ interface CTAProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#fff',
     paddingTop: 128,
     paddingBottom: 128
   },
   browseButton: {
-    marginLeft: theme.spacing(2)
+    marginLeft: 20
   }
 }));
 

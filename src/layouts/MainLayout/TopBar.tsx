@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import type { FC } from 'react';
-import { Link as RouterLink, useHistory, useLocation } from 'react-router-dom';
+// import { Link as RouterLink, useHistory, useLocation } from 'react-router-dom';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -32,6 +34,7 @@ import { IStoreState } from 'reducers/root.reducer';
 import { ICourse } from 'models/course.model';
 import { RouterPathName } from 'constants/routes.constant';
 import classNames from "classnames";
+import { const_courses } from '../../components/Constant';
 
 interface TopBarProps {
   className?: string;
@@ -47,7 +50,7 @@ interface TopBarProps {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#fff',
     height: 100,
     display: 'flex',
     alignItems: 'center',
@@ -57,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     // zIndex: -1
   },
   appbar: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#fff',
     height: 100,
   },
   toolbar: {
@@ -70,19 +73,20 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {},
   logo: {
-    marginRight: theme.spacing(2)
+    marginRight: 2,
+    cursor: 'pointer'
   },
   link: {
-    fontWeight: theme.typography.fontWeightMedium,
+    fontWeight: 'normal',
     '& + &': {
-      marginLeft: theme.spacing(2)
+      marginLeft: 2
     }
   },
   divider: {
     width: 1,
     height: 32,
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2)
+    marginLeft: 2,
+    marginRight: 2
   },
   menuWrapper: {
     marginLeft: 70,
@@ -121,7 +125,7 @@ const useStyles = makeStyles((theme) => ({
       '& .MuiList-padding': {
         paddingTop: 0,
         paddingBottom: 0,
-        '& .MuiMenuItem-root':{
+        '& .MuiMenuItem-root': {
           paddingTop: 12,
           paddingBottom: 12,
           '&:hover': {
@@ -237,30 +241,35 @@ const useStyles = makeStyles((theme) => ({
       borderTop: 'unset',
     }
   }
- 
+
 }));
 
 const selectCourses = CourseSelectors.createCoursesSelector();
 
 const TopBar: FC<TopBarProps> = (props) => {
   const classes = useStyles();
-  const history = useHistory();
-  const location = useLocation();
-  const courses = useSelector((state: IStoreState) => selectCourses(state));
+  const history = useRouter();
+  // const location = useLocation();
+  // const courses = useSelector((state: IStoreState) => selectCourses(state));
+  const courses = const_courses;
   const authState = useSelector((state: IStoreState) => state.authentication);
 
   const { className, inlineImageUrl, imageAlt, ...rest } = props;
 
+  console.log('courses--_>', const_courses)
 
   const [classesAnchorEl, setClassesAnchorEl] = React.useState(null);
   // const [teacherAnchorEl, setTeacherAnchorEl] = React.useState(null);
   const [modal, setModal] = React.useState(0);
 
-  useEffect(() => { setModal(props.modalValue) }, [props.modalValue]);
+  useEffect(() => {
+    setModal(props.modalValue);
+  }, [props.modalValue]);
+
   if (authState.isLoggedIn && modal) setModal(0);
 
   const handleClickClasses = (event) => {
-    history.push('/classes');
+    history.push('/classesView');
   };
 
   const handleSelecClass = (course: ICourse) => () => {
@@ -283,7 +292,7 @@ const TopBar: FC<TopBarProps> = (props) => {
   // const handleViewTeacherProfile = () => {
   //   history.push('/teacher/Bradley-Woolf');
   // };
-  
+
   const loginModalOpen = () => {
     setModal(1);
     props.updateModalValue(1);
@@ -296,14 +305,14 @@ const TopBar: FC<TopBarProps> = (props) => {
 
   const closeModal = () => {
     setModal(0);
-    if(props.modalValue)
+    if (props.modalValue)
       props.updateModalValue();
   };
 
   const updateModal = () => {
-    if(modal !== 0)
+    if (modal !== 0)
       setModal(0);
-    if(props.modalValue)
+    if (props.modalValue)
       props.updateModalValue();
   };
   const absoluteImage = classNames({
@@ -319,241 +328,171 @@ const TopBar: FC<TopBarProps> = (props) => {
         position="static"
         {...rest}
       >
-        {courses.length? (
-          <>
+        {/* {courses.length ? ( */}
+        <>
+          <Container
+            className={classes.container}
+            maxWidth="lg"
+          >
+            <div className={classes.toolbar}>
+              <Link href="/">
+                <Logo className={classes.logo} />
+              </Link>
+              <div className={classes.menuWrapper}>
+                <div className={clsx(classes.menuItemWrapper, history.pathname === '/' ? classes.activeLink : '')}>
+                  <Button className={clsx(classes.anchor, history.pathname === '/' ? classes.activeButton : '')} onClick={() => history.push('/')}>
+                    Home
+                    </Button>
+                </div>
+                <div
+                  className={clsx(classes.menuItemWrapper, history.pathname === '/classesView' ? classes.activeLink : '')}
+                  onMouseLeave={handleCloseClassAnchor}
+                >
+                  <Button
+                    onClick={handleClickClasses}
+                    className={classes.anchor}
+                    onMouseEnter={(e) => { setClassesAnchorEl(e.target); console.log(e.target) }}
+                    endIcon={<KeyboardArrowDownIcon className={clsx(classes.arrow, classes.closing)} />}
+                  >
+                    Classes
+                  </Button>
+                  <Popper
+                    anchorEl={classesAnchorEl}
+                    open={classesAnchorEl}
+                    placement="bottom"
+                    disablePortal={true}
+                  >
+                    <Fade in={classesAnchorEl} timeout={350}>
+                      <Paper className={classes.papper} elevation={6}>
+                        <Grid container={true}>
+                          <Grid item={true} md={6}>
+                            {courses.slice(0, courses.length / 2 + courses.length % 2).map((course) => (
+                              <div
+                                onClick={handleSelecClass(course)}
+                                className={classes.menuItem}
+                              >
+                                <Typography variant="subtitle1" component="p">
+                                  {course.name}
+                                </Typography>
+                                <Typography variant="caption" color="textSecondary">
+                                  {course.subDescription}
+                                </Typography>
+                              </div>
+                            ))}
+                          </Grid>
+                          <Grid item={true} md={6}>
+                            {courses.slice(courses.length / 2 + courses.length % 2).map((course) => (
+                              <div
+                                onClick={handleSelecClass(course)}
+                                className={classes.menuItem}
+                              >
+                                <Typography variant="subtitle1" component="p">
+                                  {course.name}
+                                </Typography>
+                                <Typography variant="caption" color="textSecondary">
+                                  {course.subDescription}
+                                </Typography>
+                              </div>
+                            ))}
+                          </Grid>
+                        </Grid>
+                      </Paper>
+                    </Fade>
+                  </Popper>
+                </div>
+                <div className={clsx(classes.menuItemWrapper, history.pathname === '/howWork' ? classes.activeLink : '')}>
+                  <Button className={clsx(classes.anchor, history.pathname === '/howWork' ? classes.activeButton : '')} onClick={() => history.push('/howWork')}>
+                    How it works
+                  </Button>
+                </div>
+                <div className={classes.menuItemWrapper}>
+                  <a href="https://alunna-blog.webflow.io/">
+                    <Button className={clsx(classes.anchor, history.pathname === '/blog' ? classes.activeButton : '')}>
+                      Blog
+                    </Button>
+                  </a>
+                </div>
+                <div className={clsx(classes.menuItemWrapper, classes.phoneWrapper, classes.noneHoverEffect)}>
+                  <img alt="Alunna phone" src="/static/images/phone.svg" />
+                  <a href="tel:+1 818 808 9948">
+                    <Typography className={classes.phoneText}>(+1) 818 808-9948</Typography>
+                  </a>
+                </div>
+                {
+                  authState.isLoggedIn ?
+                    (
+                      <>
+                        <div className={clsx(classes.menuItemWrapper, classes.phoneWrapper, classes.noneHoverEffect)}>
+                          You are logged as
+                          </div>
+                        <Link href="/profile">
+                          <div>
+                            {authState.pedingingSignUpEmail}
+                          </div>
+                        </Link>
+                      </>
+                    ) :
+                    (
+                      <div className={clsx(classes.menuItemWrapper, classes.noneHoverEffect)}>
+                        <Button className={classes.anchor} onClick={() => loginModalOpen()}>
+                          Login
+                          </Button>
+                        <CustomMainButton label="Signup" customClass={classes.signupBtn} onClick={() => registerModalOpen()} />
+                      </div>
+                    )
+                }
+
+              </div>
+            </div>
+          </Container>
+          <div>
+            {inlineImageUrl && (<img
+              alt={imageAlt}
+              src={inlineImageUrl}
+              className={clsx(props.classImageBackground, absoluteImage)}
+            />
+            )}
+          </div>
+          <Dialog
+            classes={{
+              root: classes.center,
+              paper: classes.modal
+            }}
+            open={modal > 0}
+            keepMounted
+            onClose={() => closeModal()}
+            aria-labelledby="modal-slide-title"
+            aria-describedby="modal-slide-description"
+          >
             <Container
               className={classes.container}
               maxWidth="lg"
             >
-              <div className={classes.toolbar}>
-                <RouterLink to="/" style={{ zIndex: 2 }}>
-                  <Logo className={classes.logo} />
-                </RouterLink>
-                <div className={classes.menuWrapper}>
-                  <div className={clsx(classes.menuItemWrapper, location.pathname === '/' ? classes.activeLink : '')}>
-                    <Button className={clsx(classes.anchor, location.pathname === '/' ? classes.activeButton : '')} onClick={() => history.push('/')}>
-                      Home
-                    </Button>
-                  </div>
-                  <div
-                    className={clsx(classes.menuItemWrapper, location.pathname === '/classes' ? classes.activeLink : '')}
-                    onMouseLeave={handleCloseClassAnchor}
-                  >
-                    <Button
-                      onClick={handleClickClasses}
-                      className={classes.anchor}
-                      onMouseEnter={(e) => setClassesAnchorEl(e.target)}
-                      endIcon={<KeyboardArrowDownIcon className={clsx(classes.arrow, classes.closing)} />}
-                    >
-                      Classes
-                    </Button>
-                    <Popper
-                      anchorEl={classesAnchorEl}
-                      open={classesAnchorEl}
-                      placement="bottom"
-                      disablePortal={true}
-                    >
-                      <Fade in={classesAnchorEl} timeout={350}>
-                          <Paper className={classes.papper} elevation={6}>
-                            <Grid container={true}>
-                              <Grid item={true} md={6}>
-                                {courses.slice(0, courses.length / 2 + courses.length % 2).map((course) => (
-                                  <div 
-                                    onClick={handleSelecClass(course)} 
-                                    className={classes.menuItem}
-                                  >
-                                    <Typography variant="subtitle1" component="p">
-                                      {course.name}
-                                    </Typography>
-                                    <Typography variant="caption" color="textSecondary">
-                                      {course.subDescription}
-                                    </Typography>
-                                  </div>
-                                ))}
-                              </Grid>
-                              <Grid item={true} md={6}>
-                                {courses.slice(courses.length / 2 + courses.length % 2).map((course) => (
-                                  <div 
-                                    onClick={handleSelecClass(course)} 
-                                    className={classes.menuItem}
-                                  >
-                                    <Typography variant="subtitle1" component="p">
-                                      {course.name}
-                                    </Typography>
-                                    <Typography variant="caption" color="textSecondary">
-                                      {course.subDescription}
-                                    </Typography>
-                                  </div>
-                                ))}
-                              </Grid>
-                            </Grid>
-                          </Paper>
-                        </Fade>
-                    </Popper>
-                  </div>
-                  {/* <div
-                    className={clsx(classes.menuItemWrapper, location.pathname.includes('/teacher') ? classes.activeLink : '')}
-                    onMouseLeave={handleCloseTeacherAnchor}
-                  >
-                    <Button
-                      onClick={handleClickTeacher}
-                      className={classes.anchor}
-                      endIcon={<KeyboardArrowDownIcon className={clsx(classes.arrow, classes.closing)} />}
-                      onMouseEnter={(e) => setTeacherAnchorEl(e.target)}
-                    >
-                      Teachers
-                    </Button>
-                    <Popper
-                      anchorEl={teacherAnchorEl}
-                      open={teacherAnchorEl}
-                      placement="bottom"
-                      disablePortal={true}
-                    >
-                      <Fade in={teacherAnchorEl} timeout={350}>
-                          <Paper className={classes.papper} elevation={6}>
-                            <Grid container={true}>
-                              <Grid item={true} md={6}>
-                                <div onClick={handleViewTeacherProfile} className={classes.menuItem}>
-                                  <Typography variant="subtitle1" component="p">
-                                    Jenny Wilson
-                                  </Typography>
-                                  <Typography variant="caption" color="textSecondary">
-                                    Jenny Wilson
-                                  </Typography>
-                                </div>
-                                <div onClick={handleViewTeacherProfile} className={classes.menuItem}>
-                                  <Typography variant="subtitle1" component="p">
-                                    Ronald Richards
-                                  </Typography>
-                                  <Typography variant="caption" color="textSecondary">
-                                    Ronald Richards
-                                  </Typography>
-                                </div>
-                                <div onClick={handleViewTeacherProfile} className={classes.menuItem}>
-                                  <Typography variant="subtitle1" component="p">
-                                    Brooklyn Simmons
-                                  </Typography>
-                                  <Typography variant="caption" color="textSecondary">
-                                    Brooklyn Simmons
-                                  </Typography>
-                                </div>
-                              </Grid>
-                              <Grid item={true} md={6}>
-                                <div onClick={handleViewTeacherProfile} className={classes.menuItem}>
-                                  <Typography variant="subtitle1" component="p">
-                                    Cameron Williamson
-                                  </Typography>
-                                  <Typography variant="caption" color="textSecondary">
-                                    Cameron Williamson
-                                  </Typography>
-                                </div>
-                                <div onClick={handleViewTeacherProfile} className={classes.menuItem}>
-                                  <Typography variant="subtitle1" component="p">
-                                    Marvin McKinney
-                                  </Typography>
-                                  <Typography variant="caption" color="textSecondary">
-                                    Marvin McKinney
-                                  </Typography>
-                                </div>
-                              </Grid>
-                            </Grid>
-                          </Paper>
-                      </Fade>
-                    </Popper>
-                  </div> */}
-                  <div className={clsx(classes.menuItemWrapper, location.pathname === '/how-it-works' ? classes.activeLink : '')}>
-                    <Button className={clsx(classes.anchor, location.pathname === '/how-it-works' ? classes.activeButton : '')} onClick={() => history.push('/how-it-works')}>
-                      How it works
-                    </Button>
-                  </div>
-                  <div className={classes.menuItemWrapper}>
-                    <a href="https://alunna-blog.webflow.io/">
-                      <Button className={clsx(classes.anchor, location.pathname === '/blog' ? classes.activeButton : '')}>
-                        Blog
-                      </Button>
-                    </a>
-                  </div>
-                  <div className={clsx(classes.menuItemWrapper, classes.phoneWrapper, classes.noneHoverEffect)}>
-                    <img alt="Alunna phone" src="/static/images/phone.svg" />
-                    <a href="tel:+1 818 808 9948">
-                      <Typography className={classes.phoneText}>(+1) 818 808-9948</Typography>
-                    </a>
-                  </div>
-                  {
-                    authState.isLoggedIn ? 
-                      (
-                        <>
-                          <div className={clsx(classes.menuItemWrapper, classes.phoneWrapper, classes.noneHoverEffect)}>
-                            You are logged as
-                          </div>
-                          <RouterLink to="/profile" className={clsx(classes.menuItemWrapper, classes.phoneWrapper, classes.noneHoverEffect)}>
-                            <div>
-                              {authState.pedingingSignUpEmail}
-                            </div>
-                          </RouterLink>
-                        </>
-                      ) :
-                      (
-                        <div className={clsx(classes.menuItemWrapper, classes.noneHoverEffect)}>
-                          <Button className={classes.anchor} onClick={() => loginModalOpen()}>
-                            Login
-                          </Button>
-                          <CustomMainButton label="Signup" customClass={classes.signupBtn} onClick={() => registerModalOpen()} />
-                        </div>
-                      )
-                  }
-                  
-                </div>
-              </div>
-            </Container>
-            <div>
-              {inlineImageUrl && (<img
-                  alt={imageAlt}
-                  src={inlineImageUrl}
-                  className={clsx(props.classImageBackground, absoluteImage)}
-                />
-              )}
-            </div>
-            <Dialog
-              classes={{
-                root: classes.center,
-                paper: classes.modal
-              }}
-              open={modal > 0}
-              keepMounted
-              onClose={() => closeModal()}
-              aria-labelledby="modal-slide-title"
-              aria-describedby="modal-slide-description"
-            >
-              <Container
-                className={classes.container}
-                maxWidth="lg"
+              <DialogTitle
+                id="classic-modal-slide-title"
+                disableTypography
+                className={classes.modalHeader}
               >
-                <DialogTitle
-                  id="classic-modal-slide-title"
-                  disableTypography
-                  className={classes.modalHeader}
+                <IconButton
+                  key="close"
+                  aria-label="Close"
+                  color="primary"
+                  onClick={() => closeModal()}
+
                 >
-                  <IconButton
-                    key="close"
-                    aria-label="Close"
-                    color="primary"
-                    onClick={() => closeModal()}
-                  
-                  >
-                    <Close />
-                  </IconButton>
-                </DialogTitle>
-                {(modal === 2) ? (<RegisterView openLogin={loginModalOpen} viewDeviceType={props.viewDeviceType} />) : ((modal === 1) ? (<LoginView openRegister={registerModalOpen}  viewDeviceType={props.viewDeviceType}/>) : (<></>))}
-              </Container>
-            </Dialog>
-          </>
-        ) : ("")}
-        
-      </AppBar>
+                  <Close />
+                </IconButton>
+              </DialogTitle>
+              {(modal === 2) ? (<RegisterView openLogin={loginModalOpen} viewDeviceType={props.viewDeviceType} />) : ((modal === 1) ? (<LoginView openRegister={registerModalOpen} viewDeviceType={props.viewDeviceType} />) : (<></>))}
+            </Container>
+          </Dialog>
+        </>
+        {/* ) : ("")} */}
+
+      </AppBar >
     );
   else
-    return (<MobileHeader modalValue={modal} updateModalValue={() => updateModal()}/>);
+    return (<MobileHeader modalValue={modal} updateModalValue={() => updateModal()} />);
 };
 
 TopBar.propTypes = {

@@ -66,23 +66,20 @@ const HomeView: React.FC = () => {
         viewDeviceType={viewStep}
       />
       <div className={classes.backgroundImage}>
-        <Hero openRegister={ openRegisterModal} viewDeviceType={viewStep}/>
-        <Features viewDeviceType={viewStep}/>
-        <CourseElasticSlide viewDeviceType={viewStep}/>
-        {/* <Mission viewDeviceType={viewStep} /> */}
-        <Curriculum viewDeviceType={viewStep}/>
-        <Promise viewDeviceType={viewStep}/>
+        <Hero openRegister={openRegisterModal} viewDeviceType={viewStep} />
+        <Features viewDeviceType={viewStep} />
+        <CourseElasticSlide viewDeviceType={viewStep} />
+        <Curriculum viewDeviceType={viewStep} />
+        <Promise viewDeviceType={viewStep} />
         <HowItWork />
-        {/* <BecomeTeacher /> */}
         <CaseStudy />
-        <LeaveEmail viewDeviceType={viewStep}/>
-        {/* <Testimonials viewDeviceType={viewStep} /> */}
+        <LeaveEmail viewDeviceType={viewStep} />
         <Footer
           topBgImg={'/static/home/testimonial_bg.png'}
           topBgMargin={'-200px'}
           bgBottom={"0px"}
           viewDeviceType={viewStep}
-         />
+        />
       </div>
     </div>
   );

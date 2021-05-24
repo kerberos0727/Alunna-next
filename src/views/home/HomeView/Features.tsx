@@ -18,13 +18,13 @@ interface FeaturesProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#fff',
     paddingTop: 0,
     paddingBottom: 128
   },
   avatar: {
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.contrastText
+    backgroundColor: '#fff',
+    color: '#000'
   },
   marginRight30: {
     "& div": {

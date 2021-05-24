@@ -17,13 +17,13 @@ interface HeroProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: '#fff',
       paddingTop: 90,
       height: '100vh'
   },
   technologyIcon: {
       height: 40,
-      margin: theme.spacing(1)
+      margin: 10
   },
   image: {
   },

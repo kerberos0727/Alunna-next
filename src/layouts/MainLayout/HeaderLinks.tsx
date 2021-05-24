@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 
 // @material-ui/core components
 import { makeStyles, Button } from "@material-ui/core";
@@ -36,17 +36,17 @@ const useStyles = makeStyles((theme) => ({
     width: "auto",
     margin: "0",
     padding: "0",
-    [theme.breakpoints.down("sm")]: {
-      width: "100%",
-      "&:after": {
-        width: "calc(100% - 30px)",
-        content: '""',
-        display: "block",
-        height: "1px",
-        marginLeft: "15px",
-        backgroundColor: "#e5e5e5"
-      }
-    }
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "100%",
+    //   "&:after": {
+    //     width: "calc(100% - 30px)",
+    //     content: '""',
+    //     display: "block",
+    //     height: "1px",
+    //     marginLeft: "15px",
+    //     backgroundColor: "#e5e5e5"
+    //   }
+    // }
   },
   listItemText: {
     padding: "0 !important"
@@ -75,14 +75,14 @@ const useStyles = makeStyles((theme) => ({
       color: "#4B4FE4",
       borderTop: "2px solid #4B4FE4"
     },
-    [theme.breakpoints.down("sm")]: {
-      width: "calc(100% - 30px)",
-      marginLeft: "15px",
-      textAlign: "left",
-      "& > span:first-child": {
-        justifyContent: "flex-start"
-      }
-    }
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "calc(100% - 30px)",
+    //   marginLeft: "15px",
+    //   textAlign: "left",
+    //   "& > span:first-child": {
+    //     justifyContent: "flex-start"
+    //   }
+    // }
   },
   login: {
     fontWeight: 600,
@@ -159,42 +159,42 @@ const HeaderLinks: FC = () => {
   const classes = useStyles();
   return (
     <>
-    <List className={classes.list}>
-      <ListItem className={classes.listItem}>
-        <Link to="/" className={classes.navLink}>
-          Home
-        </Link>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          buttonText="Classes"
-          buttonProps={{
-            className: classes.navLink,
-            color: "transparent"
-          }}
-          dropdownList={[
-            <Link to="/classes" className={classes.dropdownLink}>
-              Python through algorithms
-            </Link>,
-            <Link to="/" className={classes.dropdownLink}>
-              AWS Cloud Development
-            </Link>,
-            <Link to="/" className={classes.dropdownLink}>
-              MERN Application
-            </Link>,
-            <Link to="/" className={classes.dropdownLink}>
-              Machine Learning in Python
-            </Link>,
-            <Link to="/" className={classes.dropdownLink}>
-              CI/CD Automation & Deployment
-            </Link>
-          ]}
-        />
-      </ListItem>
-      
-      
-      {/* <ListItem className={classes.listItem}>
+      <List className={classes.list}>
+        <ListItem className={classes.listItem}>
+          <Link href="/">
+            <a className={classes.navLink}>Home</a>
+          </Link>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <CustomDropdown
+            noLiPadding
+            buttonText="Classes"
+            buttonProps={{
+              className: classes.navLink,
+              color: "transparent"
+            }}
+            dropdownList={[
+              <Link href="/classesView">
+                <a className={classes.dropdownLink}>Python through algorithms</a>
+              </Link>,
+              <Link href="/">
+                <a className={classes.dropdownLink}>AWS Cloud Development</a>
+              </Link>,
+              <Link href="/">
+                <a className={classes.dropdownLink}>MERN Application</a>
+              </Link>,
+              <Link href="/">
+                <a className={classes.dropdownLink}>Machine Learning in Python</a>
+              </Link>,
+              <Link href="/">
+                <a className={classes.dropdownLink}>CI/CD Automation & Deployment</a>
+              </Link>
+            ]}
+          />
+        </ListItem>
+
+
+        {/* <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
           buttonText="Teachers"
@@ -221,19 +221,19 @@ const HeaderLinks: FC = () => {
           ]}
         />
       </ListItem> */}
-      <ListItem className={classes.listItem}>
-        <Link to="/how-it-works" className={classes.navLink}>
-          How it works
-        </Link>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Link to="/blog" className={classes.navLink}>
-          Blog
-        </Link>
-      </ListItem>
-    </List>
-        
-    
+        <ListItem className={classes.listItem}>
+          <Link href="/howWork">
+            <a className={classes.navLink}>How it works</a>
+          </Link>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <Link href="/blog">
+            <a className={classes.navLink}>Blog</a>
+          </Link>
+        </ListItem>
+      </List>
+
+
     </>
   );
 }

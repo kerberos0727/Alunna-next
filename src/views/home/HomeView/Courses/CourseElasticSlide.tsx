@@ -9,6 +9,7 @@ import Carousel from 'react-elastic-carousel';
 import * as CourseSelectors from 'selectors/course.selector';
 import { useSelector } from 'react-redux';
 import { IStoreState } from 'reducers/root.reducer';
+import { const_courses } from '../../../../components/Constant';
 
 interface OwnProps {
   viewDeviceType?: number;
@@ -18,18 +19,18 @@ type Props = OwnProps;
 
 const selectCourses = CourseSelectors.createCoursesSelector();
 
-const CourseSlide = ({viewDeviceType}) => {
+const CourseSlide = ({ viewDeviceType }) => {
   const classes = useStyles();
   // const [activeStep, setActiveStep] = React.useState(0);
   const [countPerPage, setCountPerPage] = React.useState(null);
   const [showArrow, setShowArrow] = React.useState(true);
 
-  const courses = useSelector((state: IStoreState) => selectCourses(state));
+  const courses = const_courses;
 
   React.useEffect(() => {
-    if (viewDeviceType === 0) { setCountPerPage(3); setShowArrow(true);}
-    else if(viewDeviceType === 1) { setCountPerPage(2); setShowArrow(true);}
-    else if(viewDeviceType === 2)  { setCountPerPage(1); setShowArrow(false);}
+    if (viewDeviceType === 0) { setCountPerPage(3); setShowArrow(true); }
+    else if (viewDeviceType === 1) { setCountPerPage(2); setShowArrow(true); }
+    else if (viewDeviceType === 2) { setCountPerPage(1); setShowArrow(false); }
   }, [viewDeviceType]);
 
   // const handleStepChange = (step: number) => {
@@ -56,7 +57,7 @@ const CourseSlide = ({viewDeviceType}) => {
       </div>
       <Carousel itemsToShow={countPerPage} isRTL={false} outerSpacing={20} showArrows={showArrow}>
         {courses.map((courseData, index) => (
-          <CourseCard 
+          <CourseCard
             key={index}
             id={courseData.id.toString()}
             imgSrc={courseData.cardImageUrl}
@@ -81,8 +82,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     height: 50,
-    paddingLeft: theme.spacing(4),
-    backgroundColor: theme.palette.background.default
+    paddingLeft: 40,
+    backgroundColor: '#fff'
   },
   blackTitle: {
     fontSize: 38,

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { create } from 'jss';
 import rtl from 'jss-rtl';
@@ -23,40 +23,40 @@ import { AWS_COGNITO } from 'constants/configurations.constant';
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
-Amplify.configure({ 
-  aws_cognito_region: AWS_COGNITO.REGION,
-  aws_user_pools_id: AWS_COGNITO.USER_POOL_ID,
-  aws_user_pools_web_client_id: AWS_COGNITO.APP_CLIENT_ID,
+Amplify.configure({
+    aws_cognito_region: AWS_COGNITO.REGION,
+    aws_user_pools_id: AWS_COGNITO.USER_POOL_ID,
+    aws_user_pools_web_client_id: AWS_COGNITO.APP_CLIENT_ID,
 });
 
 const App = () => {
-  const dispatch = useDispatch();
-  const { settings } = useSettings();
+    const dispatch = useDispatch();
+    const { settings } = useSettings();
 
-  const theme = createTheme({
-    direction: settings.direction,
-    responsiveFontSizes: settings.responsiveFontSizes,
-    theme: THEMES.LIGHT
-  });
+    const theme = createTheme({
+        direction: settings.direction,
+        responsiveFontSizes: settings.responsiveFontSizes,
+        theme: THEMES.LIGHT
+    });
 
-  useEffect(() => {
-    dispatch(CourseActions.requestCourses());
-  }, [dispatch]);
+    useEffect(() => {
+        dispatch(CourseActions.requestCourses());
+    }, [dispatch]);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <StylesProvider jss={jss}>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-            <BrowserRouter>
-                <GlobalStyles />
-                <ScrollReset />
-                {/* <SettingsNotification /> */}
-                {renderRoutes(routes)}
-            </BrowserRouter>
-        </MuiPickersUtilsProvider>
-      </StylesProvider>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <StylesProvider jss={jss}>
+                <MuiPickersUtilsProvider utils={MomentUtils}>
+                    {/* <BrowserRouter> */}
+                    <GlobalStyles />
+                    <ScrollReset />
+                    {/* <SettingsNotification /> */}
+                    {renderRoutes(routes)}
+                    {/* </BrowserRouter> */}
+                </MuiPickersUtilsProvider>
+            </StylesProvider>
+        </ThemeProvider>
+    );
 };
 
 export default App;

@@ -8,11 +8,10 @@ import {
   Typography,
   Container,
   Card,
-  Link,
   CardContent
 } from '@material-ui/core';
 import CompleteAccountSetupForm from './CompleteAccountSetupForm';
-import { Link as RouterLink } from 'react-router-dom';
+import Link from 'next/link';
 
 interface CompleteAccountSetupProps {
   className?: string;
@@ -83,10 +82,10 @@ const CompleteAccountSetupPage: FC<CompleteAccountSetupProps> = ({ className, se
           <CardContent className={classes.cardContent}>
             <div className={classes.logoLink}>
               <Link
-                component={RouterLink}
-                to="/"
-                variant="body2"
-                color="primary"
+                // component={RouterLink}
+                href="/"
+                // variant="body2"
+                // color="primary"
                 
               >
                 <img
@@ -120,11 +119,11 @@ const CompleteAccountSetupPage: FC<CompleteAccountSetupProps> = ({ className, se
               <Typography className={classes.loginText}>I'm already a member, &nbsp;</Typography>
               <Typography>
                 <Link
-                  component={RouterLink}
-                  to="/"
-                  variant="body2"
-                  color="primary"
-                  className={classes.loginLink}
+                  // component={RouterLink}
+                  href="/"
+                  // variant="body2"
+                  // color="primary"
+                  // className={classes.loginLink}
                 >
                   Log in
                 </Link>

@@ -4,7 +4,7 @@ import { makeStyles, Theme, Container, Button, Typography, Card, CardContent, Bo
 import CustomText from 'components/CustomText';
 import Footer from 'layouts/FooterLayout';
 import IconWithText from 'components/IconWithText';
-import { useHistory } from 'react-router';
+import { useRouter } from 'next/router';
 import useRouterQueryParams from 'hooks/useRouterQueryParam';
 import CustomMainButton from 'components/CustomMainButton';
 import clsx from 'clsx';
@@ -146,7 +146,7 @@ const ThankYouPage: FC = () => {
 
   const query = useRouterQueryParams();
 
-  const history = useHistory();
+  const history = useRouter();
   const action = query.get('action');
   const [viewStep, setViewStep] = React.useState(0);
 	

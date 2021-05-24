@@ -18,11 +18,11 @@ interface FAQSProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
-    paddingTop: theme.spacing(6),
-    paddingBottom: theme.spacing(6),
+    backgroundColor: '#333',
+    paddingTop: 60,
+    paddingBottom: 60,
     '& dt': {
-      marginTop: theme.spacing(2)
+      marginTop: 20
     }
   }
 }));

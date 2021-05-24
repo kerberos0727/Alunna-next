@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, Container } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import CustomText from 'components/CustomText';
 import Footer from 'layouts/FooterLayout';
 import CustomTextLarge from 'components/CustomTextLarge';
@@ -79,19 +79,19 @@ const NotFoundPage = () => {
   }, []);
   const leftContentClasses = classNames({
     [classes.leftContent]: true,
-    [classes.mobileLeft]: viewStep===2,
+    [classes.mobileLeft]: viewStep === 2,
   });
   const notFoundText = classNames({
     [classes.notFoundText]: true,
-    [classes.mobileText]: viewStep===2,
+    [classes.mobileText]: viewStep === 2,
   });
   const notFoundImg = classNames({
     [classes.notFoundImg]: true,
-    [classes.mobileImage4]: viewStep===2,
+    [classes.mobileImage4]: viewStep === 2,
   });
   const backToHome = classNames({
     [classes.backToHome]: true,
-    [classes.w100]: viewStep===2,
+    [classes.w100]: viewStep === 2,
   });
   return (
     <div className={classes.root}>
@@ -102,7 +102,7 @@ const NotFoundPage = () => {
         viewDeviceType={viewStep}
       />
       {viewStep === 2 ? (
-        <img className={ classes.robotImage } src="/static/images/robo.png" alt="hero img"/>
+        <img className={classes.robotImage} src="/static/images/robo.png" alt="hero img" />
       )
         : (<></>)
       }
@@ -122,7 +122,7 @@ const NotFoundPage = () => {
           <div className={classes.notFoundContent}>
             <CustomText color="#546681">
               Please return to the homepage, and if this problem persists,
-              please email our team so we can address the issue at hand: <br/> <b>tech@alunna.io</b> <br/> Thank you!
+              please email our team so we can address the issue at hand: <br /> <b>tech@alunna.io</b> <br /> Thank you!
             </CustomText>
             {/* <IconWithText
               CIcon={'/static/images/message.png'}
@@ -132,13 +132,13 @@ const NotFoundPage = () => {
             <CustomText color="#546681">Thank you!</CustomText> */}
           </div>
           <div className={backToHome}>
-            <Link to='/'>
+            <Link href='/'>
               <CustomMainButton label={'Back to home page'} />
             </Link>
           </div>
         </div>
       </Container>
-      <Footer viewDeviceType={viewStep}/>
+      <Footer viewDeviceType={viewStep} />
     </div>
   );
 };

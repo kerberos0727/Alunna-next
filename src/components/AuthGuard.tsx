@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FC, ReactNode } from 'react';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useAuth from '../hooks/useAuth';
 

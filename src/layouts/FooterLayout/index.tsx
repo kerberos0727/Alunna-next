@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { makeStyles, Theme, Grid, Container, Box } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -14,6 +14,7 @@ import { RouterPathName } from 'constants/routes.constant';
 import { useSelector } from 'react-redux';
 import { IStoreState } from 'reducers/root.reducer';
 import * as CourseSelectors from 'selectors/course.selector';
+import { const_courses } from '../../components/Constant';
 
 const useStyles = makeStyles((theme: Theme) => ({
   footer: {
@@ -66,7 +67,8 @@ const selectCourses = CourseSelectors.createCoursesSelector();
 const Footer = props => {
   const classes = useStyles();
   const { topBgImg, topBgMargin, bgBottom, viewDeviceType } = props;
-  const courses = useSelector((state: IStoreState) => selectCourses(state));
+  const courses = const_courses;
+
   // const [smNumber, setSmNumber] = React.useState(4);
 
   // React.useEffect(() => {
@@ -157,7 +159,7 @@ const Footer = props => {
                   text={'Blockchain'}
                 /> */}
                 {courses.map(course => (
-                  <Link to={"/courses/" + course.id}>
+                  <Link href={"/courses/" + course.id}>
                     <TextFooterNormal
                       styleCustom={'5px'}
                       text={course.name}
@@ -169,16 +171,16 @@ const Footer = props => {
             <Grid item md={2} sm={4} xs={12}>
               <TextFooterBold text={'Home'} />
               <Box marginTop={3}>
-                <Link to={RouterPathName.Teachers}>
+                <Link href={RouterPathName.Teachers}>
                   <TextFooterNormal styleCustom={'5px'} text={'Teachers'} />
                 </Link>
-                <Link to={RouterPathName.HowItWorks}>
+                <Link href={RouterPathName.HowItWorks}>
                   <TextFooterNormal styleCustom={'5px'} text={'How it works'} />
                 </Link>
-                <Link to={RouterPathName.Contact}>
+                <Link href={RouterPathName.Contact}>
                   <TextFooterNormal styleCustom={'5px'} text={'Contacts'} />
                 </Link>
-                <Link to={RouterPathName.Blogs}>
+                <Link href={RouterPathName.Blogs}>
                   <TextFooterNormal styleCustom={'5px'} text={'Blog'} />
                 </Link>
               </Box>
@@ -262,16 +264,16 @@ const Footer = props => {
             <Grid item md={2} sm={12} xs={12}>
               <TextFooterBold text={'Home'} />
               <Box marginTop={3}>
-                <Link to={RouterPathName.Teachers}>
+                <Link href={RouterPathName.Teachers}>
                   <TextFooterNormal styleCustom={'15px'} text={'Teachers'} />
                 </Link>
-                <Link to={RouterPathName.HowItWorks}>
+                <Link href={RouterPathName.HowItWorks}>
                   <TextFooterNormal styleCustom={'15px'} text={'How it works'} />
                 </Link>
-                <Link to={RouterPathName.Contact}>
+                <Link href={RouterPathName.Contact}>
                   <TextFooterNormal styleCustom={'15px'} text={'Contacts'} />
                 </Link>
-                <Link to={RouterPathName.Blogs}>
+                <Link href={RouterPathName.Blogs}>
                   <TextFooterNormal styleCustom={'15px'} text={'Blog'} />
                 </Link>
                 <div className={classes.contactContainer}>

@@ -18,16 +18,16 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0
   },
   small: {
-    height: theme.spacing(1),
-    width: theme.spacing(1)
+    height: 10,
+    width: 10
   },
   medium: {
-    height: theme.spacing(2),
-    width: theme.spacing(2)
+    height: 20,
+    width: 20
   },
   large: {
-    height: theme.spacing(3),
-    width: theme.spacing(3)
+    height: 30,
+    width: 30
   },
   offline: {
     backgroundColor: colors.grey[50]

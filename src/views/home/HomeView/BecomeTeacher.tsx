@@ -6,7 +6,7 @@ import CustomMainButton from 'components/CustomMainButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#fff',
 
     display: 'flex',
     marginBottom: 160,

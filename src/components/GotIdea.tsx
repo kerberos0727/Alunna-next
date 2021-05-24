@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { makeStyles, Theme, Button } from '@material-ui/core';
 import CustomText from './CustomText';
 import CustomMainButton from './CustomMainButton';
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const GotIdea = props => {
   const classes = useStyles();
-  const history = useHistory();
+  const history = useRouter();
 
   return (
     <div className={classes.contentBottom}>

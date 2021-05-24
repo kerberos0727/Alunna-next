@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { makeStyles, Theme, Container, Typography, Grid } from '@material-ui/core';
 import CustomText from 'components/CustomText';
 import Footer from 'layouts/FooterLayout';
-import { useHistory } from 'react-router';
+import { useRouter } from 'next/router';
 import useRouterQueryParams from 'hooks/useRouterQueryParam';
 import CustomMainButton from 'components/CustomMainButton';
 import TopBar from 'layouts/MainLayout/TopBar';
@@ -149,7 +149,7 @@ const ThankYouPage: FC = () => {
 
   const query = useRouterQueryParams();
 
-  const history = useHistory();
+  const history = useRouter();
   const action = query.get('action');
   const [viewStep, setViewStep] = React.useState(0);
 	

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Button, Container, Link, Typography } from '@material-ui/core';
+import { Box, Button, Container, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import CustomMainButton from 'components/CustomMainButton';
 import classNames from "classnames";
-import { Link as RouterLink } from 'react-router-dom';
+import Link from 'next/link';
 
 const useStyles = makeStyles(theme => createStyles({
   root: {
@@ -77,18 +77,18 @@ const CourseIdea = (props) => {
         </Typography>
         <Typography className={classes.desc}>
           Feel free to ping us at&nbsp;
-          <Link href="mailto:team@alunna.io" color="primary">
+          <Link href="mailto:team@alunna.io">
             team@alunna.io.
           </Link>&nbsp;
           We value your input and are happy to make courses that help you!
         </Typography>
         <Box mt={3}>
           <CustomMainButton label="Sign up" customClass={classes.customCTAButton} onClick={() => openSignup()} />
-            <RouterLink to="/classes">
+            <Link href="/classesView">
               <Button variant="outlined" className={processBtn}>
                   See our courses
               </Button>
-            </RouterLink>
+            </Link>
         </Box>
       </div>
     </Container>

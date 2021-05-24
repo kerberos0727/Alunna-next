@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 // import moment from 'moment';
 import CustomMainButton from '../../../../components/CustomMainButton';
 import clsx from 'clsx';
-import { useHistory } from 'react-router';
+import { useRouter } from 'next/router';
 import { RouterPathName } from 'constants/routes.constant';
 
 const useStyles = makeStyles({
@@ -88,7 +88,7 @@ export interface CourseProps {
 
 export default function CourseCard(props: CourseProps) {
   const classes = useStyles();
-  const history = useHistory();
+  const history = useRouter();
 
   return (
     <Card raised className={classes.root}>

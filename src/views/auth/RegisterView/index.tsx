@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 'calc(100vh - 80px)'
   },
   cardContent: {
-    padding: theme.spacing(4),
+    padding: 40,
     display: 'flex',
     flexDirection: 'column',
     minHeight: 400,

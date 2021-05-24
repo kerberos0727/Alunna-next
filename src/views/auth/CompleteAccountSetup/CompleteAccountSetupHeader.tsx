@@ -5,10 +5,9 @@ import {
   makeStyles,
   Typography,
   Container,
-  Link,
   Theme
 } from '@material-ui/core';
-import { Link as RouterLink } from 'react-router-dom';
+import Link from 'next/link';
 
 interface CompleteAccountSetupHeaderProps {
 }
@@ -16,8 +15,8 @@ interface CompleteAccountSetupHeaderProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     height: 100,
-    paddingBottom: theme.spacing(2),
-    paddingTop: theme.spacing(2),
+    paddingBottom: 20,
+    paddingTop: 20,
     display: 'flex',
     alignItems: 'center',
   },
@@ -29,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   banner: {
   },
   bannerChip: {
-    marginRight: theme.spacing(2)
+    marginRight: 20
   },
   cardContent: {
 
@@ -65,11 +64,11 @@ const CompleteAccountSetupHeader: FC<CompleteAccountSetupHeaderProps> = ({ ...re
         maxWidth="lg"
       >
         <Link
-          component={RouterLink}
-          to="/"
-          variant="body2"
-          color="primary"
-          className={classes.logoLink}
+          // component={RouterLink}
+          href="/"
+          // variant="body2"
+          // color="primary"
+          // className={classes.logoLink}
         >
           <img
             alt="Logo"
@@ -81,11 +80,11 @@ const CompleteAccountSetupHeader: FC<CompleteAccountSetupHeaderProps> = ({ ...re
           <Typography className={classes.loginText}>I'm already a member, &nbsp;</Typography>
           <Typography>
             <Link
-              component={RouterLink}
-              to="/"
-              variant="body2"
-              color="primary"
-              className={classes.loginLink}
+              // component={RouterLink}
+              href="/"
+              // variant="body2"
+              // color="primary"
+              // className={classes.loginLink}
             >
               Log in
             </Link>

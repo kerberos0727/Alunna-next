@@ -5,7 +5,7 @@ import TopBar from 'layouts/MainLayout/TopBar';
 import classNames from "classnames";
 import { useSelector } from 'react-redux';
 import { IStoreState } from 'reducers/root.reducer';
-import { useHistory } from 'react-router-dom'
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Profile = props => {
   const classes = useStyles();
-  const history = useHistory();
+  const history = useRouter();
   const [modal, setModal] = React.useState(0);
   const [viewStep, setViewStep] = React.useState(0);
   const authState = useSelector((state: IStoreState) => state.authentication);
